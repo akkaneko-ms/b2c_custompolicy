@@ -13,7 +13,7 @@ jobs:
     - name: 'Upload TrustFrameworkBase Policy'
       uses: azure-ad-b2c/deploy-trustframework-policy@v3
       with:
-        folder: "./policies/SocialAndLocalAccounts"
+        folder: "b2c_custompolicy/policies/SocialAndLocalAccounts"
         files: "TrustFrameworkBase.xml,TrustFrameworkLocalization.xml,TrustFrameworkExtensions.xml,SignUpOrSignin.xml,ProfileEdit.xml,PasswordReset.xml"
         tenant: ${{ env.tenant }}
         clientId: ${{ env.clientId }}
