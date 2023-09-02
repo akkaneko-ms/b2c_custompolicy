@@ -1,15 +1,18 @@
-﻿<TrustFrameworkPolicy xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/online/cpim/schemas/2013/06" PolicySchemaVersion="0.3.0.0" TenantId="b2cakk.onmicrosoft.com" PolicyId="B2C_1A_TrustFrameworkExtensions" PublicPolicyUri="http://b2cakk.onmicrosoft.com/B2C_1A_TrustFrameworkExtensions" TenantObjectId="fe7aceeb-3143-4852-8afd-563b9e4078ce">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TrustFrameworkPolicy
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns="http://schemas.microsoft.com/online/cpim/schemas/2013/06"
+  PolicySchemaVersion="0.3.0.0"
+  TenantId="b2cakk.onmicrosoft.com"
+  PolicyId="B2C_1A_TrustFrameworkExtensions"
+  PublicPolicyUri="http://b2cakk.onmicrosoft.com/B2C_1A_TrustFrameworkExtensions">
+
   <BasePolicy>
     <TenantId>b2cakk.onmicrosoft.com</TenantId>
     <PolicyId>B2C_1A_TrustFrameworkLocalization</PolicyId>
   </BasePolicy>
   <BuildingBlocks>
-    <ClaimsSchema>
-      <ClaimType Id="correlationId">
-        <DisplayName>correlation ID</DisplayName>
-        <DataType>string</DataType>
-      </ClaimType>
-    </ClaimsSchema>
     <ContentDefinitions>
       <ContentDefinition Id="api.signuporsignin">
         <LocalizedResourcesReferences MergeBehavior="Prepend">
@@ -110,7 +113,9 @@
       </LocalizedResources>
     </Localization>
   </BuildingBlocks>
+
   <ClaimsProviders>
+
     <ClaimsProvider>
       <DisplayName>Facebook</DisplayName>
       <TechnicalProfiles>
@@ -123,6 +128,7 @@
         </TechnicalProfile>
       </TechnicalProfiles>
     </ClaimsProvider>
+
     <ClaimsProvider>
       <Domain>google.com</Domain>
       <DisplayName>Google</DisplayName>
@@ -162,6 +168,7 @@
         </TechnicalProfile>
       </TechnicalProfiles>
     </ClaimsProvider>
+
     <ClaimsProvider>
       <DisplayName>Local Account SignIn</DisplayName>
       <TechnicalProfiles>
@@ -175,6 +182,7 @@
             <InputClaim ClaimTypeReferenceId="resource_id" PartnerClaimType="resource" DefaultValue="e688dfb2-adee-408e-b974-fff0f58411fc" />
           </InputClaims>
         </TechnicalProfile>
+
         <TechnicalProfile Id="SelfAsserted-LocalAccountSignin-Email">
           <DisplayName>Local Account Signin</DisplayName>
           <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.SelfAssertedAttributeProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
@@ -183,7 +191,7 @@
             <Item Key="setting.operatingMode">Email</Item>
             <Item Key="ContentDefinitionReferenceId">api.localaccountsignin</Item>
             <Item Key="IncludeClaimResolvingInClaimsHandling">true</Item>
-            <Item Key="setting.showSignupLink">true</Item>
+            <Item Key="setting.showSignupLink">false</Item>
           </Metadata>
           <IncludeInSso>false</IncludeInSso>
           <InputClaims>
@@ -201,11 +209,13 @@
           <UseTechnicalProfileForSessionManagement ReferenceId="SM-AAD" />
         </TechnicalProfile>
       </TechnicalProfiles>
-    </ClaimsProvider>
+    
   </ClaimsProviders>
+
   <UserJourneys>
     <UserJourney Id="CustomSignUpSignIn">
       <OrchestrationSteps>
+
         <OrchestrationStep Order="1" Type="CombinedSignInAndSignUp" ContentDefinitionReferenceId="api.signuporsignin">
           <ClaimsProviderSelections>
             <ClaimsProviderSelection TargetClaimsExchangeId="GoogleExchange" />
@@ -216,6 +226,7 @@
             <ClaimsExchange Id="LocalAccountSigninEmailExchange" TechnicalProfileReferenceId="SelfAsserted-LocalAccountSignin-Email" />
           </ClaimsExchanges>
         </OrchestrationStep>
+
         <!-- Check if the user has selected to sign in using one of the social providers -->
         <OrchestrationStep Order="2" Type="ClaimsExchange">
           <Preconditions>
@@ -230,6 +241,7 @@
             <ClaimsExchange Id="SignUpWithLogonEmailExchange" TechnicalProfileReferenceId="LocalAccountSignUpWithLogonEmail" />
           </ClaimsExchanges>
         </OrchestrationStep>
+
         <!-- For social IDP authentication, attempt to find the user account in the directory. -->
         <OrchestrationStep Order="3" Type="ClaimsExchange">
           <Preconditions>
@@ -240,9 +252,10 @@
             </Precondition>
           </Preconditions>
           <ClaimsExchanges>
-            <ClaimsExchange Id="AADUserReadUsingAlternativeSecurityId" TechnicalProfileReferenceId="AAD-UserReadUsingAlternativeSecurityId-NoError" />
+            <ClaimsExchange Id="AADUserReadUsingAlternativeSecurityId" TechnicalProfileReferenceId="AAD-UserReadUsingAlternativeSecurityId" />
           </ClaimsExchanges>
         </OrchestrationStep>
+
         <!-- Show self-asserted page only if the directory does not have the user account already (i.e. we do not have an objectId). 
           This can only happen when authentication happened using a social IDP. If local account was created or authentication done
           using ESTS in step 2, then an user account must exist in the directory by this time. -->
@@ -257,6 +270,7 @@
             <ClaimsExchange Id="SelfAsserted-Social" TechnicalProfileReferenceId="SelfAsserted-Social" />
           </ClaimsExchanges>
         </OrchestrationStep>
+
         <!-- This step reads any user attributes that we may not have received when authenticating using ESTS so they can be sent 
           in the token. -->
         <OrchestrationStep Order="5" Type="ClaimsExchange">
@@ -285,9 +299,12 @@
             <ClaimsExchange Id="AADUserWrite" TechnicalProfileReferenceId="AAD-UserWriteUsingAlternativeSecurityId" />
           </ClaimsExchanges>
         </OrchestrationStep>
+
         <OrchestrationStep Order="7" Type="SendClaims" CpimIssuerTechnicalProfileReferenceId="JwtIssuer" />
+
       </OrchestrationSteps>
       <ClientDefinition ReferenceId="DefaultWeb" />
     </UserJourney>
   </UserJourneys>
+
 </TrustFrameworkPolicy>
