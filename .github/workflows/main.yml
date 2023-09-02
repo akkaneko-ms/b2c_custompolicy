@@ -17,5 +17,5 @@ jobs:
         files: "TrustFrameworkBase.xml,TrustFrameworkLocalization.xml,TrustFrameworkExtensions.xml,SignUpOrSignin.xml,ProfileEdit.xml,PasswordReset.xml"
         tenant: ${{ env.tenant }}
         clientId: ${{ env.clientId }}
-        clientSecret: ${{ secrets.clientSecret }}
+        clientSecret: ${{ secrets.SECRET1 }}
         
