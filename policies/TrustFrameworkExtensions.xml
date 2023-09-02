@@ -211,7 +211,7 @@
         </TechnicalProfile>
       </TechnicalProfiles>
     </ClaimsProvider> -->
-    <ClaimsProvider>
+    <!-- <ClaimsProvider>
       <DisplayName>Local Account</DisplayName>
       <TechnicalProfiles>
         <TechnicalProfile Id="ForgotPassword">
@@ -231,7 +231,7 @@
           <UseTechnicalProfileForSessionManagement ReferenceId="SM-AAD" />
         </TechnicalProfile>
       </TechnicalProfiles>
-    </ClaimsProvider>
+    </ClaimsProvider>-->
   </ClaimsProviders>
 
   <UserJourneys>
@@ -242,7 +242,7 @@
             <ClaimsProviderSelection TargetClaimsExchangeId="GoogleExchange" />
             <ClaimsProviderSelection TargetClaimsExchangeId="FacebookExchange" />
             <ClaimsProviderSelection ValidationClaimsExchangeId="LocalAccountSigninEmailExchange" />
-            <ClaimsProviderSelection TargetClaimsExchangeId="ForgotPasswordExchange" />
+            <!--<ClaimsProviderSelection TargetClaimsExchangeId="ForgotPasswordExchange" />-->
           </ClaimsProviderSelections>
           <ClaimsExchanges>
             <ClaimsExchange Id="LocalAccountSigninEmailExchange" TechnicalProfileReferenceId="SelfAsserted-LocalAccountSignin-Email" />
