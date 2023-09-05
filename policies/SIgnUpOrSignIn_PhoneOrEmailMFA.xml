@@ -357,7 +357,7 @@
           </ClaimsExchanges>
         </OrchestrationStep>
 
-        <!--Sample: MFA with email-->
+        <!--Sample: MFA with email_-->
         <OrchestrationStep Order="8" Type="ClaimsExchange">
           <Preconditions>
             <Precondition Type="ClaimEquals" ExecuteActionsIf="false">
