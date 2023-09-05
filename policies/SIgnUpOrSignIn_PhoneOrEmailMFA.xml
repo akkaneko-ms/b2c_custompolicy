@@ -151,8 +151,8 @@
           <Metadata>
             <Item Key="Operation">Write</Item>
             <Item Key="RaiseErrorIfClaimsPrincipalAlreadyExists">false</Item>
-            <Item Key="ClientId">c2125b4c-206e-414c-a20a-8e6d3e94a0ec</Item>
-            <Item Key="ApplicationObjectId">c64b0d12-32ba-47d5-97ef-ae6af312f2ab</Item>
+            <Item Key="ClientId">23f467a2-8c91-4297-b79d-df836afd2745</Item>
+            <Item Key="ApplicationObjectId">011c270a-8df4-4ec0-bce6-546979c8f239</Item>
           </Metadata>
           <InputClaims>
             <InputClaim ClaimTypeReferenceId="objectId" />
@@ -170,8 +170,8 @@
 
         <TechnicalProfile Id="AAD-UserWritePhoneNumberUsingObjectId">
           <Metadata>
-                <Item Key="ClientId">c2125b4c-206e-414c-a20a-8e6d3e94a0ec</Item>
-                <Item Key="ApplicationObjectId">c64b0d12-32ba-47d5-97ef-ae6af312f2ab</Item>
+                <Item Key="ClientId">23f467a2-8c91-4297-b79d-df836afd2745</Item>
+                <Item Key="ApplicationObjectId">011c270a-8df4-4ec0-bce6-546979c8f239</Item>
           </Metadata>
           <PersistedClaims>
             <!--Sample: Add the MFA preferred method to the persisted claims collection -->
