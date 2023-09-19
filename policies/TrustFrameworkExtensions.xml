@@ -132,7 +132,7 @@
   </ClaimsProviders>
 
   <UserJourneys>
-    <UserJourney Id="SignUpOrSignIn">
+    <UserJourney Id="SignUpOrSignInAppInsights">
       <OrchestrationSteps>
 
         <OrchestrationStep Order="1" Type="CombinedSignInAndSignUp" ContentDefinitionReferenceId="api.signuporsignin">
