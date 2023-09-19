@@ -12,44 +12,46 @@
     <TenantId>b2cakk.onmicrosoft.com</TenantId>
     <PolicyId>B2C_1A_TrustFrameworkLocalization</PolicyId>
   </BasePolicy>
+  
 <BuildingBlocks>
-  <ClaimType Id="EventType">
-    <DisplayName>Event type</DisplayName>
-    <DataType>string</DataType>
-  </ClaimType>
-  <ClaimType Id="EventTimestamp">
-    <DisplayName>Event timestamp</DisplayName>
-    <DataType>string</DataType>
-  </ClaimType>
-  <ClaimType Id="PolicyId">
-    <DisplayName>Policy Id</DisplayName>
-    <DataType>string</DataType>
-  </ClaimType>
-  <ClaimType Id="Culture">
-    <DisplayName>Culture ID</DisplayName>
-    <DataType>string</DataType>
-  </ClaimType>
-  <ClaimType Id="CorrelationId">
-    <DisplayName>Correlation Id</DisplayName>
-    <DataType>string</DataType>
-  </ClaimType>
-  <ClaimType Id="federatedUser">
-    <DisplayName>Federated user</DisplayName>
-    <DataType>boolean</DataType>
-  </ClaimType>
-  <ClaimType Id="parsedDomain">
-    <DisplayName>Domain name</DisplayName>
-    <DataType>string</DataType>
-    <UserHelpText>The domain portion of the email address.</UserHelpText>
-  </ClaimType>
-  <ClaimType Id="userInLocalDirectory">
-    <DisplayName>userInLocalDirectory</DisplayName>
-    <DataType>boolean</DataType>
-  </ClaimType>
-  </BuildingBlocks>
+  <ClaimsSchema>
+    <ClaimType Id="EventType">
+      <DisplayName>Event type</DisplayName>
+      <DataType>string</DataType>
+    </ClaimType>
+    <ClaimType Id="EventTimestamp">
+      <DisplayName>Event timestamp</DisplayName>
+      <DataType>string</DataType>
+    </ClaimType>
+    <ClaimType Id="PolicyId">
+      <DisplayName>Policy Id</DisplayName>
+      <DataType>string</DataType>
+    </ClaimType>
+    <ClaimType Id="Culture">
+      <DisplayName>Culture ID</DisplayName>
+      <DataType>string</DataType>
+    </ClaimType>
+    <ClaimType Id="CorrelationId">
+      <DisplayName>Correlation Id</DisplayName>
+      <DataType>string</DataType>
+    </ClaimType>
+    <ClaimType Id="federatedUser">
+      <DisplayName>Federated user</DisplayName>
+      <DataType>boolean</DataType>
+    </ClaimType>
+    <ClaimType Id="parsedDomain">
+      <DisplayName>Domain name</DisplayName>
+      <DataType>string</DataType>
+      <UserHelpText>The domain portion of the email address.</UserHelpText>
+    </ClaimType>
+    <ClaimType Id="userInLocalDirectory">
+      <DisplayName>userInLocalDirectory</DisplayName>
+      <DataType>boolean</DataType>
+    </ClaimType>
+  </ClaimsSchema>
+</BuildingBlocks>
 
   <ClaimsProviders>
-
     <ClaimsProvider>
       <DisplayName>Facebook</DisplayName>
       <TechnicalProfiles>
@@ -62,7 +64,6 @@
         </TechnicalProfile>
       </TechnicalProfiles>
     </ClaimsProvider>
-
 
     <ClaimsProvider>
       <DisplayName>Local Account SignIn</DisplayName>
@@ -79,6 +80,7 @@
         </TechnicalProfile>
       </TechnicalProfiles>
     </ClaimsProvider>
+
     <ClaimsProvider>
       <DisplayName>Application Insights</DisplayName>
       <TechnicalProfiles>
