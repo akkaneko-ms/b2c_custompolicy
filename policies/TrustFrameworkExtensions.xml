@@ -132,7 +132,7 @@
   </ClaimsProviders>
 
   <UserJourneys>
-    <UserJourney Id="SignUpOrSignInAppInsights">
+    <UserJourney Id="SignUpOrSignIn">
       <OrchestrationSteps>
 
         <OrchestrationStep Order="1" Type="CombinedSignInAndSignUp" ContentDefinitionReferenceId="api.signuporsignin">
@@ -145,12 +145,11 @@
           </ClaimsExchanges>
         </OrchestrationStep>
 
-        <!-- Check if the user has selected to sign in using one of the social providers -->
-<!-- Track that we have received a sign in request -->
+        <!-- Track that we have received a sign in request -->
         <OrchestrationStep Order="2" Type="ClaimsExchange">
-            <ClaimsExchanges>
-                <ClaimsExchange Id="TrackSignInRequest" TechnicalProfileReferenceId="AppInsights-SignInRequest" />
-            </ClaimsExchanges>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TrackSignInRequest" TechnicalProfileReferenceId="AppInsights-SignInRequest" />
+          </ClaimsExchanges>
         </OrchestrationStep>
 
         <!-- For social IDP authentication, attempt to find the user account in the directory. -->
@@ -196,7 +195,6 @@
             <ClaimsExchange Id="AADUserReadWithObjectId" TechnicalProfileReferenceId="AAD-UserReadUsingObjectId" />
           </ClaimsExchanges>
         </OrchestrationStep>
-
         <!-- The previous step (SelfAsserted-Social) could have been skipped if there were no attributes to collect 
              from the user. So, in that case, create the user in the directory if one does not already exist 
              (verified using objectId which would be set from the last step if account was created in the directory. -->
@@ -231,29 +229,22 @@
              requests. -->
         <!-- Handles the user selecting the sign-up link in the local account sign-in page -->
         <OrchestrationStep Order="8" Type="ClaimsExchange">
-            <Preconditions>
+          <Preconditions>
             <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
-                <Value>newUser</Value>
-                <Action>SkipThisOrchestrationStep</Action>
+              <Value>newUser</Value>
+              <Action>SkipThisOrchestrationStep</Action>
             </Precondition>
             <Precondition Type="ClaimEquals" ExecuteActionsIf="true">
-                <Value>newUser</Value>
-                <Value>false</Value>
-                <Action>SkipThisOrchestrationStep</Action>
+              <Value>newUser</Value>
+              <Value>false</Value>
+              <Action>SkipThisOrchestrationStep</Action>
             </Precondition>
-            </Preconditions>
-            <ClaimsExchanges>
+          </Preconditions>
+          <ClaimsExchanges>
             <ClaimsExchange Id="TrackUserSignUp" TechnicalProfileReferenceId="AppInsights-UserSignup" />
-            </ClaimsExchanges>
+          </ClaimsExchanges>
         </OrchestrationStep>
-
-	<!-- Track that we have successfully sent a token -->
-        <OrchestrationStep Order="9" Type="ClaimsExchange">
-            <ClaimsExchanges>
-                <ClaimsExchange Id="TrackSignInComplete" TechnicalProfileReferenceId="AppInsights-SignInComplete" />
-            </ClaimsExchanges>
-        </OrchestrationStep>
-
+        <OrchestrationStep Order="9" Type="SendClaims" CpimIssuerTechnicalProfileReferenceId="JwtIssuer" />
         <!-- Track that we have successfully sent a token -->
         <OrchestrationStep Order="10" Type="ClaimsExchange">
           <ClaimsExchanges>
