@@ -246,8 +246,10 @@
             <ClaimsExchange Id="TrackUserSignUp" TechnicalProfileReferenceId="AppInsights-UserSignup" />
           </ClaimsExchanges>
         </OrchestrationStep>
+
         <OrchestrationStep Order="9" Type="SendClaims" CpimIssuerTechnicalProfileReferenceId="JwtIssuer" />
         <!-- Track that we have successfully sent a token -->
+
         <OrchestrationStep Order="10" Type="ClaimsExchange">
           <ClaimsExchanges>
             <ClaimsExchange Id="TrackSignInComplete" TechnicalProfileReferenceId="AppInsights-SignInComplete" />
