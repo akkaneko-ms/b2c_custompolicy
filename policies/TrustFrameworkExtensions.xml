@@ -14,6 +14,8 @@
   </BasePolicy>
   
 <BuildingBlocks>
+  <ClaimsSchema>
+  </ClaimsSchema>
 </BuildingBlocks>
 
   <ClaimsProviders>
@@ -46,8 +48,9 @@
       </TechnicalProfiles>
     </ClaimsProvider>
   </ClaimsProviders>
-
-  <UserJourneys>
-	</UserJourneys>
+  
+  <!--UserJourneys>
+	
+	</UserJourneys-->
 
 </TrustFrameworkPolicy>
