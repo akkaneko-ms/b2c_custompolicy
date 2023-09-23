@@ -14,8 +14,8 @@
   </BasePolicy>
   
 <BuildingBlocks>
-  <ClaimsSchema>
-  </ClaimsSchema>
+  <!--ClaimsSchema>
+  </ClaimsSchema-->
 </BuildingBlocks>
 
   <ClaimsProviders>
