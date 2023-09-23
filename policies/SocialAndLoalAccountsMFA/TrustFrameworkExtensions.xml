@@ -12,12 +12,13 @@
     <TenantId>b2cakk.onmicrosoft.com</TenantId>
     <PolicyId>B2C_1A_TrustFrameworkLocalization</PolicyId>
   </BasePolicy>
- <BuildingBlocks>
-      
-  </BuildingBlocks>
+  
+<BuildingBlocks>
+  <!--ClaimsSchema>
+  </ClaimsSchema-->
+</BuildingBlocks>
 
   <ClaimsProviders>
-
     <ClaimsProvider>
       <DisplayName>Facebook</DisplayName>
       <TechnicalProfiles>
@@ -30,7 +31,6 @@
         </TechnicalProfile>
       </TechnicalProfiles>
     </ClaimsProvider>
-
 
     <ClaimsProvider>
       <DisplayName>Local Account SignIn</DisplayName>
@@ -47,10 +47,9 @@
         </TechnicalProfile>
       </TechnicalProfiles>
     </ClaimsProvider>
-
   </ClaimsProviders>
-
-    <!--UserJourneys>
+  
+  <!--UserJourneys>
 	
 	</UserJourneys-->
 
