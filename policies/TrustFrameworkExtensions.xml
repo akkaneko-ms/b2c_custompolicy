@@ -57,13 +57,13 @@
           <Protocol Name="OpenIdConnect" />
           <Metadata>
             <Item Key="ProviderName">https://login.live.com</Item>
-            <Item Key="METADATA">1bfcb107-3763-4fae-88a4-e14a64488c5d</Item>
+            <Item Key="METADATA">https://login.live.com/.well-known/openid-configuration</Item>
             <Item Key="response_types">code</Item>
             <Item Key="response_mode">form_post</Item>
             <Item Key="scope">openid profile email</Item>
             <Item Key="HttpBinding">POST</Item>
             <Item Key="UsePolicyInRedirectUri">false</Item>
-            <Item Key="client_id">Your Microsoft application client ID</Item>
+            <Item Key="client_id">1bfcb107-3763-4fae-88a4-e14a64488c5d</Item>
           </Metadata>
           <CryptographicKeys>
             <Key Id="client_secret" StorageReferenceId="B2C_1A_MSASecret" />
