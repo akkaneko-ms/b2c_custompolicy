@@ -131,9 +131,9 @@
 
         <OrchestrationStep Order="1" Type="CombinedSignInAndSignUp" ContentDefinitionReferenceId="api.signuporsignin">
           <ClaimsProviderSelections>
-            <!--ClaimsProviderSelection TargetClaimsExchangeId="FacebookExchange" /-->
+            <ClaimsProviderSelection TargetClaimsExchangeId="FacebookExchange" />
             <ClaimsProviderSelection ValidationClaimsExchangeId="LocalAccountSigninEmailExchange" />
-            <!--ClaimsProviderSelection TargetClaimsExchangeId="MicrosoftAccountExchange" /-->
+            <ClaimsProviderSelection TargetClaimsExchangeId="MicrosoftAccountExchange" />
           </ClaimsProviderSelections>
           <ClaimsExchanges>
             <ClaimsExchange Id="LocalAccountSigninEmailExchange" TechnicalProfileReferenceId="SelfAsserted-LocalAccountSignin-Email" />
