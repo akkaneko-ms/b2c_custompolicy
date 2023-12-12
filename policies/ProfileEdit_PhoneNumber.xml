@@ -8,7 +8,6 @@
     <TenantId>b2cakk.onmicrosoft.com</TenantId>
     <PolicyId>B2C_1A_Demo_TrustFrameworkExtensions_EditPhoneNumber</PolicyId>
   </BasePolicy>
-
   <RelyingParty>
     <DefaultUserJourney ReferenceId="EditMFAPhoneNumber" />
     <TechnicalProfile Id="PolicyProfile">
