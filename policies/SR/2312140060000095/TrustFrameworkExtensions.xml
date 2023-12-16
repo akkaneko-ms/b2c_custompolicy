@@ -14,6 +14,20 @@
   </BasePolicy>
   <BuildingBlocks>
 
+    <ClaimsSchema>
+
+      <ClaimType Id="socialIdpUserId">
+        <DisplayName>Username</DisplayName>
+        <DataType>string</DataType>
+        <UserHelpText/>
+        <UserInputType>TextBox</UserInputType>
+        <Restriction>
+          <Pattern RegularExpression="^[a-zA-Z0-9]+[a-zA-Z0-9_-]*$" HelpText="The username you provided is not valid. It must begin with an alphabet or number and can contain alphabets, numbers and the following symbols: _ -" />
+        </Restriction>
+      </ClaimType>
+
+    </ClaimsSchema>
+    
   </BuildingBlocks>
 
   <ClaimsProviders>
