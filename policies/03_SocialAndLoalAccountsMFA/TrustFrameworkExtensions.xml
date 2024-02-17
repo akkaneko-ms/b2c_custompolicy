@@ -14,8 +14,18 @@
   </BasePolicy>
   
 <BuildingBlocks>
-  <!--ClaimsSchema>
-  </ClaimsSchema-->
+  <!--add-->
+  <ClaimsSchema>
+      <!-- The claim socialIdpUserId has been renamed to issuerUserId -->
+      <ClaimType Id="jobTitle">
+        <DisplayName>jobTitle</DisplayName>
+        <DataType>string</DataType>
+        <UserHelpText />
+      </ClaimType>
+
+  </ClaimsSchema>
+  <!--add-->
+  </ClaimsSchema>
 </BuildingBlocks>
 
   <ClaimsProviders>
@@ -60,6 +70,9 @@
             <OutputClaim ClaimTypeReferenceId="displayName" PartnerClaimType="name" />
             <OutputClaim ClaimTypeReferenceId="identityProvider" DefaultValue="google.com" />
             <OutputClaim ClaimTypeReferenceId="authenticationSource" DefaultValue="socialIdpAuthentication" />
+            <!--add-->
+            <OutputClaim ClaimTypeReferenceId="jobTitle" PartnerClaimType="jobTitle" />
+            <!--add-->
           </OutputClaims>
           <OutputClaimsTransformations>
             <OutputClaimsTransformation ReferenceId="CreateRandomUPNUserName" />
