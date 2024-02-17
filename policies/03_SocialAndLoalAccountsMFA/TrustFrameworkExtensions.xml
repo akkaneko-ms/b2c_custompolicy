@@ -61,6 +61,13 @@
           <CryptographicKeys>
             <Key Id="client_secret" StorageReferenceId="B2C_1A_GoogleSecret" />
           </CryptographicKeys>
+
+          <!--add-->
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="jobTitle" PartnerClaimType="title" />    
+          </InputClaims>
+          <!--add-->
+
           <OutputClaims>
             <OutputClaim ClaimTypeReferenceId="issuerUserId" PartnerClaimType="id" />
             <OutputClaim ClaimTypeReferenceId="email" PartnerClaimType="email" />
@@ -69,9 +76,11 @@
             <OutputClaim ClaimTypeReferenceId="displayName" PartnerClaimType="name" />
             <OutputClaim ClaimTypeReferenceId="identityProvider" DefaultValue="google.com" />
             <OutputClaim ClaimTypeReferenceId="authenticationSource" DefaultValue="socialIdpAuthentication" />
+
             <!--add-->
-            <OutputClaim ClaimTypeReferenceId="jobTitle" PartnerClaimType="jobTitle" />
+            <OutputClaim ClaimTypeReferenceId="jobTitle" PartnerClaimType="title" />
             <!--add-->
+
           </OutputClaims>
           <OutputClaimsTransformations>
             <OutputClaimsTransformation ReferenceId="CreateRandomUPNUserName" />
