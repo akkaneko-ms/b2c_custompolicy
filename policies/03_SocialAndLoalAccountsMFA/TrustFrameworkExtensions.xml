@@ -17,8 +17,8 @@
   <!--add-->
   <ClaimsSchema>
       <!-- The claim socialIdpUserId has been renamed to issuerUserId -->
-      <ClaimType Id="jobTitle">
-        <DisplayName>jobTitle</DisplayName>
+      <ClaimType Id="location">
+        <DisplayName>location</DisplayName>
         <DataType>string</DataType>
         <UserHelpText />
       </ClaimType>
@@ -62,11 +62,11 @@
             <Key Id="client_secret" StorageReferenceId="B2C_1A_GoogleSecret" />
           </CryptographicKeys>
 
-          <!--add-->
+          <!--add>
           <InputClaims>
-            <InputClaim ClaimTypeReferenceId="jobTitle" PartnerClaimType="title" />    
+            <InputClaim ClaimTypeReferenceId="location" PartnerClaimType="locale" />    
           </InputClaims>
-          <!--add-->
+          <add-->
 
           <OutputClaims>
             <OutputClaim ClaimTypeReferenceId="issuerUserId" PartnerClaimType="id" />
@@ -78,7 +78,7 @@
             <OutputClaim ClaimTypeReferenceId="authenticationSource" DefaultValue="socialIdpAuthentication" />
 
             <!--add-->
-            <OutputClaim ClaimTypeReferenceId="jobTitle" PartnerClaimType="title" />
+            <OutputClaim ClaimTypeReferenceId="location" PartnerClaimType="locale" />
             <!--add-->
 
           </OutputClaims>

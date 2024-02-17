@@ -36,7 +36,7 @@
         <OutputClaim ClaimTypeReferenceId="identityProvider" />
         <OutputClaim ClaimTypeReferenceId="tenantId" AlwaysUseDefaultValue="true" DefaultValue="{Policy:TenantObjectId}" />
         <!--add-->
-        <OutputClaim ClaimTypeReferenceId="jobTitle" PartnerClaimType="title"/>
+        <OutputClaim ClaimTypeReferenceId="location" PartnerClaimType="locale"/>
         <!--add-->
       </OutputClaims>
       <SubjectNamingInfo ClaimType="sub" />
