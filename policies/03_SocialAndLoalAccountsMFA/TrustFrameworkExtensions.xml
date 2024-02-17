@@ -25,7 +25,6 @@
 
   </ClaimsSchema>
   <!--add-->
-  </ClaimsSchema>
 </BuildingBlocks>
 
   <ClaimsProviders>
