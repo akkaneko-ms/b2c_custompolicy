@@ -10,6 +10,12 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    # Step to set up Node.js v20
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '20'
+        
     - name: 'Upload TrustFrameworkBase Policy'
       uses: azure-ad-b2c/deploy-trustframework-policy@v5
       with:
@@ -18,4 +24,3 @@ jobs:
         tenant: ${{ env.tenant }}
         clientId: ${{ env.clientId }}
         clientSecret: ${{ secrets.SECRET1 }}
-        
