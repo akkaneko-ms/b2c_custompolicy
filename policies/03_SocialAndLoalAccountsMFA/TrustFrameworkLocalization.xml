@@ -100,9 +100,19 @@
           <LocalizedString ElementType="UxElement" StringId="remember_me">Keep me signed in</LocalizedString> -->
           <LocalizedString ElementType="ClaimsProvider" StringId="FacebookExchange">Facebook</LocalizedString>
           <LocalizedString ElementType="ErrorMessage" StringId="ResourceOwnerFlowInvalidCredentials">Your password is incorrect.</LocalizedString>
-          <LocalizedString ElementType="ErrorMessage" StringId="UserMessageIfInvalidPassword">Your password is incorrect.</LocalizedString>
+
+          <!-- 20240312 SignInMessage-->
+          <!-- <LocalizedString ElementType="ErrorMessage" StringId="UserMessageIfInvalidPassword">Your password is incorrect.</LocalizedString>-->
+          <LocalizedString ElementType="ErrorMessage" StringId="UserMessageIfInvalidPassword">Incorrect ID or password.</LocalizedString>
+          <!-- 20240312 SignInMessage-->
+
           <LocalizedString ElementType="ErrorMessage" StringId="UserMessageIfPasswordExpired">Your password has expired.</LocalizedString>
-          <LocalizedString ElementType="ErrorMessage" StringId="UserMessageIfClaimsPrincipalDoesNotExist">We can't seem to find your account.</LocalizedString>
+
+          <!-- 20240312 SignInMessage-->
+          <!-- <LocalizedString ElementType="ErrorMessage" StringId="UserMessageIfClaimsPrincipalDoesNotExist">We can't seem to find your account.</LocalizedString>-->
+          <LocalizedString ElementType="ErrorMessage" StringId="UserMessageIfClaimsPrincipalDoesNotExist">Incorrect ID or password.</LocalizedString>
+          <!-- 20240312 SignInMessage-->
+
           <LocalizedString ElementType="ErrorMessage" StringId="UserMessageIfOldPasswordUsed">Looks like you used an old password.</LocalizedString>
           <LocalizedString ElementType="ErrorMessage" StringId="DefaultMessage">Invalid username or password.</LocalizedString>
           <LocalizedString ElementType="ErrorMessage" StringId="UserMessageIfUserAccountDisabled">Your account has been locked. Contact your support person to unlock it, then try again.</LocalizedString>

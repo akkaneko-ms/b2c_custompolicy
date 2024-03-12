@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8" ?>
+  <TrustFrameworkPolicy 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+    xmlns="http://schemas.microsoft.com/online/cpim/schemas/2013/06" 
+    PolicySchemaVersion="0.3.0.0" 
+    TenantId="b2cakk.onmicrosoft.com" 
+    PolicyId="B2C_1A_signup_gbiz_sendMS" 
+    PublicPolicyUri="http://b2cakk.onmicrosoft.com/B2C_1A_signup_gbiz_sendMS">
+    
+    <BasePolicy>
+      <TenantId>b2cakk.onmicrosoft.com</TenantId>
+      <PolicyId>B2C_1A_TrustFrameworkLocalization</PolicyId>
+    </BasePolicy>
+    
+  <BuildingBlocks>
+    <!--add-->
+        <!-- The claim socialIdpUserId has been renamed to issuerUserId -->
+    <ClaimsSchema>
+        <ClaimType Id="accountType">
+            <DisplayName>accountType</DisplayName>
+            <DataType>string</DataType>
+        </ClaimType>
+    </ClaimsSchema>
+
+    <!--add-->
+  </BuildingBlocks>
+
+  <ClaimsProviders>
+        <ClaimsProvider>
+            <DisplayName>gbiz idp</DisplayName>
+            <TechnicalProfiles>
+
+                <!-- gbiz認証 -->
+                <TechnicalProfile Id="MockGbiz-SignUp-OAUTH">
+                    <DisplayName>gBizIDでアカウント作成</DisplayName>
+                    <Protocol Name="OpenIdConnect" />
+                    <Metadata>
+                        <Item Key="METADATA">https://auth.sub.ptn-11370.net/realms/gBizID/.well-known/openid-configuration</Item>
+                        <Item Key="client_id">azure-ad-b2c</Item>
+                        <Item Key="response_types">code</Item>
+                        <Item Key="scope">openid profile</Item>
+                        <Item Key="response_mode">query</Item>
+                        <Item Key="HttpBinding">POST</Item>
+                        <Item Key="UsePolicyInRedirectUri">false</Item>
+                    </Metadata>
+                    <CryptographicKeys>
+                        <Key Id="client_secret" StorageReferenceId="B2C_1A_B2cRestClientAccessToken" />
+                    </CryptographicKeys>
+                    <InputClaims>
+                        <InputClaim ClaimTypeReferenceId="email" />
+                    </InputClaims>
+                    <OutputClaims>
+                        <OutputClaim ClaimTypeReferenceId="issuerUserId" PartnerClaimType="sub" />
+                        <OutputClaim ClaimTypeReferenceId="email" PartnerClaimType="email" />
+                        <OutputClaim ClaimTypeReferenceId="identityProvider" PartnerClaimType="iss" />
+                        <OutputClaim ClaimTypeReferenceId="displayName" PartnerClaimType="name" />
+                        <!-- 02/21修正箇所 -->
+                        <OutputClaim ClaimTypeReferenceId="accountType" PartnerClaimType="account_type" />
+                    </OutputClaims>
+                    <OutputClaimsTransformations>
+                        <OutputClaimsTransformation ReferenceId="CreateRandomUPNUserName" />
+                        <OutputClaimsTransformation ReferenceId="CreateUserPrincipalName" />
+                        <OutputClaimsTransformation ReferenceId="CreateAlternativeSecurityId" />
+                        <OutputClaimsTransformation
+                            ReferenceId="CreateSubjectClaimFromAlternativeSecurityId" />
+                    </OutputClaimsTransformations>
+                    <UseTechnicalProfileForSessionManagement ReferenceId="SM-AAD" />
+                </TechnicalProfile>
+
+            </TechnicalProfiles>
+        </ClaimsProvider>
+
+  </ClaimsProviders>
+
+  <UserJourneys>
+
+    <UserJourney Id="signup_with_gbiz" DefaultCpimIssuerTechnicalProfileReferenceId="JwtIssuer">
+        <OrchestrationSteps>
+
+            <!-- GbizIDプロバイダ認証 -->
+            <OrchestrationStep Order="1" Type="ClaimsExchange">
+                <ClaimsExchanges>
+                    <ClaimsExchange Id="GbizSignUp"
+                        TechnicalProfileReferenceId="MockGbiz-SignUp-OAUTH" />
+                </ClaimsExchanges>
+            </OrchestrationStep>
+
+            <!-- AADにアカウント作成・書き込み -->
+            <OrchestrationStep Order="2" Type="ClaimsExchange">
+                <ClaimsExchanges>
+                    <ClaimsExchange Id="CreateAccountBasedGbiz"
+                        TechnicalProfileReferenceId="AAD-UserWriteUsingAlternativeSecurityId" />
+                </ClaimsExchanges>
+            </OrchestrationStep>
+
+            <!-- アカウント重複確認：AAD既存アカウント読み込み -->
+            <OrchestrationStep Order="3" Type="ClaimsExchange">
+                <ClaimsExchanges>
+                    <ClaimsExchange Id="AADUserReadUsingAlternativeSecurityId"
+                        TechnicalProfileReferenceId="AAD-UserReadUsingAlternativeSecurityId" />
+                </ClaimsExchanges>
+            </OrchestrationStep>
+
+            <!-- アカウント重複確認：AAD/GUID重複確認 -->
+            <OrchestrationStep Order="4" Type="ClaimsExchange">
+                <Preconditions>
+                    <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+                        <Value>objectId</Value>
+                        <Action>SkipThisOrchestrationStep</Action>
+                    </Precondition>
+                </Preconditions>
+                <ClaimsExchanges>
+                    <ClaimsExchange Id="SelfAsserted-Social"
+                        TechnicalProfileReferenceId="SelfAsserted-Social" />
+                </ClaimsExchanges>
+            </OrchestrationStep>
+
+            <!-- 02/21 追加連絡による変更箇所 -->
+            <!-- 連携ID生成 -->
+            <!-- <OrchestrationStep Order="5" Type="ClaimsExchange">
+                <ClaimsExchanges>
+                    <ClaimsExchange Id="LinkageId"
+                        TechnicalProfileReferenceId="SetLinkageIdToRandom" />
+                </ClaimsExchanges>
+            </OrchestrationStep> -->
+
+            <!-- トークン送信 -->
+            <OrchestrationStep Order="5" Type="SendClaims"
+                CpimIssuerTechnicalProfileReferenceId="JwtIssuer" />
+
+        </OrchestrationSteps>
+    </UserJourney>
+
+  </UserJourneys>
+  
+  <RelyingParty>
+    <DefaultUserJourney ReferenceId="signup_with_gbiz" />
+    <Endpoints>
+      <!--points to refresh token journey when app makes refresh token request-->
+      <Endpoint Id="Token" UserJourneyReferenceId="RedeemRefreshToken" />
+    </Endpoints>
+    <UserJourneyBehaviors>
+      <JourneyInsights TelemetryEngine="ApplicationInsights" InstrumentationKey="c76d419a-5c52-49f3-892c-0af6cb4d06f6" DeveloperMode="true" ClientEnabled="true" ServerEnabled="true" TelemetryVersion="1.0.0" />
+    </UserJourneyBehaviors>
+    <TechnicalProfile Id="PolicyProfile">
+      <DisplayName>PolicyProfile</DisplayName>
+      <Protocol Name="OpenIdConnect" />
+      <OutputClaims>
+        <OutputClaim ClaimTypeReferenceId="displayName" />
+        <OutputClaim ClaimTypeReferenceId="givenName" />
+        <OutputClaim ClaimTypeReferenceId="surname" />
+        <OutputClaim ClaimTypeReferenceId="email" />
+        <OutputClaim ClaimTypeReferenceId="objectId" PartnerClaimType="sub"/>
+        <OutputClaim ClaimTypeReferenceId="identityProvider" />
+        <OutputClaim ClaimTypeReferenceId="tenantId" AlwaysUseDefaultValue="true" DefaultValue="{Policy:TenantObjectId}" />
+        <!--add-->
+        <OutputClaim ClaimTypeReferenceId="accountType" />
+        <!--add-->
+      </OutputClaims>
+      <SubjectNamingInfo ClaimType="sub" />
+    </TechnicalProfile>
+  </RelyingParty>
+</TrustFrameworkPolicy>
