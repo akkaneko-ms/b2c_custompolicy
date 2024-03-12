@@ -11,9 +11,9 @@ jobs:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
     - name: 'Upload TrustFrameworkBase Policy'
-      uses: azure-ad-b2c/deploy-trustframework-policy@v4
+      uses: azure-ad-b2c/deploy-trustframework-policy@v3
       with:
-        node-version: 20
+        node-version: 18
         folder: "./policies/03_SocialAndLoalAccountsMFA"
         files: "TrustFrameworkBase.xml,TrustFrameworkLocalization.xml,TrustFrameworkExtensions.xml,SignUpOrSignin.xml,ProfileEdit.xml,PasswordReset.xml"
         tenant: ${{ env.tenant }}
